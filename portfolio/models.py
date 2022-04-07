@@ -19,6 +19,7 @@ from streams import blocks
 
 class PortfolioListingPage(Page):
     "Lists all Portfolio Detail pages."
+    parent_page_types = ["home.LandingPage"]
 
     custom_title = models.CharField(
         max_length=100,
@@ -53,6 +54,8 @@ class PortfolioListingPage(Page):
 
 class PortfolioDetailPage(Page):
     """Portfolio Detail page."""
+
+    parent_page_types = ["portfolio.PortfolioListingPage"]
 
     subtitle = models.TextField(
         max_length=300,
