@@ -1,0 +1,102 @@
+{
+  /*
+      Python
+  */
+
+  "python.defaultInterpreterPath": "/Users/raoul/.virtualenvs/wagfolio/bin/python",
+
+  /*
+      Linting
+  */
+
+  "python.linting.enabled": true,
+  // Pylint or Flake8? Why not both :)
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": [
+    "--load-plugins=pylint_django",
+    "--django-settings-module=config.settings.local",
+    "--disable=C0114,C0115,C0116,W0105"
+  ],
+  // Flake8
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": [
+    "--max-line-length=99",
+    "--ignore=E402,F841,F401,E302,E305"
+  ],
+
+  /*
+      isort
+  */
+
+  // Match isort settings with black
+  // https://pycqa.github.io/isort/docs/configuration/options
+  "python.sortImports.args": ["--profile", "black"],
+
+  // Make sure to use the project isort package/version (VS code tends to use it's own)
+  "python.sortImports.path": "/Users/raoul/.virtualenvs/wagtail-quickstart/bin/isort",
+  // "python.sortImports.args": [
+  //   "--line-length",
+  //   "99",
+  //   "--multi-line",
+  //   "0",
+  //   "--use-parentheses"
+  // ],
+
+  "[python]": {
+    "editor.rulers": [99],
+    "editor.formatOnPaste": false,
+    "editor.codeActionsOnSave": {
+      // Enable isort on save
+      // Note this will run isort first, then black will be run
+      "python.sortImports": true,
+      "source.organizeImports": true
+      // "source.organizeImports.python": true
+    }
+  },
+
+  /*
+      Formatting
+  */
+
+  // Configure the Black code formatter
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": [
+    // "--skip-string-normalization",
+    "--line-length=99"
+  ],
+  // Black version 20.8b1 has a bug that doesn't add a newline
+  // to the end of a file, so let's make sure
+  "files.insertFinalNewline": true,
+  // Format code on save
+  "editor.formatOnSave": true,
+  // Get rid of annoying error popup:
+  // 'Black does not support the "Format Selection" command'
+  // https://github.com/microsoft/vscode-python/issues/1883
+  "editor.formatOnPaste": false,
+
+  /* Various */
+
+  // Git commit messages shouldn't be longer than 50 characters.
+  "[git-commit]": {
+    "editor.rulers": [50]
+  },
+
+  /* Spelling */
+
+  "cSpell.words": [
+    "automodule",
+    "devfolio",
+    "genindex",
+    "hasher",
+    "howto",
+    "maxdepth",
+    "modindex",
+    "noindex",
+    "password",
+    "pbkdf",
+    "pytest",
+    "quickstart",
+    "toctree"
+  ],
+  "restructuredtext.confPath": "${workspaceFolder}/docs"
+}
