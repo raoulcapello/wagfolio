@@ -1,0 +1,36 @@
+        {% load wagtailimages_tags %}
+        <section class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+
+                    <!-- Masonry grid -->
+                    <div class="masonry-grid" data-columns="3">
+
+                        {% for card in self.cards  %}
+                        <!-- Item -->
+                        <div class="masonry-grid-item">
+                            <div class="card card-hover">
+
+                                {% if card.image %}
+                                {% image card.image fill-120x120 as image %}
+                                <img class="card-img-top" src="{{ image.url }}" alt="{{ image.alt }}" width="32">
+                                {% endif %}
+
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ card.title }}</h5>
+                                    <p class="card-text fs-sm">{{ card.text }}</p>
+
+                                    {% if card.link.url %}
+                                    <a href="{{ card.link.url }}" class="btn btn-sm btn-primary">{{ card.link.link_text }}</a>
+                                    {% endif %}
+
+                                </div> <!-- /.card-body -->
+                            </div> <!-- /.card -->
+                        </div> <!-- /.masonry-grid-item -->
+                        {% endfor %}
+
+                    </div> <!-- /.masonry-grid -->
+
+                </div> <!-- /.col -->
+            </div> <!-- /.row -->
+        </section> <!-- /.container -->

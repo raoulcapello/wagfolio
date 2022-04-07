@@ -1,0 +1,5 @@
+                        <div class="text-nowrap mb-3">
+                            {% for button in self.buttons %}
+                              <a class="btn btn-outline-primary{% if button.disabled %} disabled{% endif %}" href="#{{ button.section_id }}" data-scroll>{{ button.text }}</a>
+                            {% endfor %}
+                        </div>

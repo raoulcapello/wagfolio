@@ -1,0 +1,39 @@
+                            {% load static i18n wagtailcore_tags wagtailimages_tags %}
+                            <!-- Services-->
+                            <section id="about" class="bg-faded-primary position-relative py-md-7 py-5">
+                                <div class="container my-2 my-md-0">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-5 mb-md-0 mb-5 pb-md-0 pb-3">
+                                            <img class="d-block mx-md-0 mx-auto" src="{% static 'img/about-me.svg' %}" alt="Illustration">
+                                        </div>
+                                        <div class="col-lg-6 offset-lg-1 col-md-7 text-md-start text-center">
+                                            <div class="mx-md-0 mx-auto" style="max-width: 500px;">
+                                            <h2 class="mb-md-5 mb-4">{{ self.title }}</h2>
+                                            {% for usp in self.usps %}
+                                                <!-- Media item (Service)-->
+                                                <div class="d-md-flex align-items-start d-block mb-4 pb-2">
+                                                    {% if usp.image %}
+                                                      {% image usp.image fill-64x64 as usp_image %}
+                                                    <img class="me-md-4 mb-md-0 mb-4" src="{{ usp_image.url }}" alt="Icon">
+                                                    {% endif %}
+                                                    <div class="ps-md-2">
+                                                        <h3 class="h6 mb-2">{{ usp.title }}</h3>
+                                                        <p class="mb-0 fs-sm">{{ usp.description }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shape shape-top shape-curve-side bg-body">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 250">
+                                        <path fill="currentColor" d="M3000,250V0H0v51c572.7-34.3,1125.3-34.3,1657.8,0C2190.3,85.2,2637.7,151.6,3000,250z"></path>
+                                    </svg>
+                                </div>
+                                <div class="shape shape-bottom shape-curve-side bg-body">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 250">
+                                        <path fill="currentColor" d="M0,0l0,250h3000v-51c-572.7,34.3-1125.3,34.3-1657.8,0C809.7,164.8,362.3,98.4,0,0z"></path>
+                                    </svg>
+                                </div>
+                            </section>

@@ -1,0 +1,110 @@
+            {% extends "base.html" %}
+
+            {% load static wagtailcore_tags wagtailimages_tags %}
+
+            {% block vendor_styles %}
+              <link rel="stylesheet" href="{% static 'css/tiny-slider.css' %}">
+              <link rel="stylesheet" href="{% static 'css/lightgallery.min.css' %}">
+            {% endblock vendor_styles %}
+
+            {% block navbar %}
+              {% include 'partials/_navbar_top_float.html' %}
+            {% endblock navbar %}
+
+            {% block messages %}{% endblock messages %}
+
+            {% block page_content %}
+              <!-- Page content-->
+              <section class="sidebar-enabled sidebar-end">
+                <div class="container">
+                  <div class="row">
+                    <!-- Project description-->
+                    <div class="col-lg-4 sidebar pt-5 pt-lg-7 order-lg-2">
+                      <div class="px-sm-4 pt-6 py-lg-6 position-relative zindex-5">
+                        <!-- Project Title -->
+                        <h1 class="h2">{{ page.title }}</h1>
+                        <p class="fs-sm">{{ page.subtitle }}</p>
+                        <div class="d-sm-flex align-items-center pt-3 pb-2 mb-5 border-bottom fs-sm">
+                          <div class="d-flex align-items-center mb-3">
+                            {% if page.date %}
+                            <!-- Project launch date -->
+                            <div class="text-nowrap text-muted me-3"><i class="ai-calendar me-1"></i><span>{{ page.date }}</span></div>
+                            {% endif %}
+                            <!-- Project categories -->
+                            {% if page.categories %}
+                            <div class="text-nowrap text-muted"><i class="ai-tag me-1"></i><span>{% for category in page.categories.all %}{{ category }}{% if forloop.revcounter != 1 %}, {% endif %}{% endfor %}</span></div>
+                            {% endif %}
+                          </div><a class="btn btn-translucent-primary btn-sm ms-auto mb-3 d-inline-block d-lg-none" href="#gallery" data-scroll>Project Gallery</a>
+                        </div>
+                        <h3 class="h5">Project Details</h3>
+                        <ul class="list-unstyled fs-md mb-4 pb-2">
+                          {% if page.live_url %}
+                            <!-- Live URL -->
+                            <li data-bs-toggle="modal" data-bs-target="#messageModal">
+                              <i class="ai-globe" alt="Live URL"></i>
+                              <a class="nav-link-style ms-2" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Check it out live!">react-weather-app.raoulcapello.com</a>
+                            </li>
+                          {% endif %}
+
+                          {% if page.repo_url %}
+                            <!-- Repo URL -->
+                            <li>
+                              <i class="ai-github"></i>
+                              <a class="nav-link-style ms-2" href="{{ page.repo_url }}" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Check out the source code!">raoulcapello/react-weather-app</a>
+                            </li>
+                          {% endif %}
+
+                        </ul>
+                        {% for block in page.text %}
+                          {% include_block block %}
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <!-- Project gallery (List)-->
+                   <div class="col-lg-8 content pt-2 pt-lg-7 pb-lg-4 order-lg-1" id="gallery">
+                      <div class="gallery row pt-5 pb-4 py-lg-5">
+                          {% for block in page.body %}
+                            {% include_block block %}
+                          {% endfor %}
+                  </div> <!-- Project description-->
+                </div>
+              </section>
+
+              <!-- Related projects (Carousel)-->
+              <section class="border-top py-5 py-lg-6">
+                <div class="container py-3 py-md-0">
+                  <h2 class="h3 text-center mb-5">Other projects</h2>
+                  <div class="tns-carousel-wrapper">
+                    <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: false, &quot;nav&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1, &quot;gutter&quot;: 16},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 16}, &quot;780&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 16}, &quot;1000&quot;:{&quot;items&quot;:4, &quot;gutter&quot;: 23}}}">
+                      {% for item in portfolio_items %}
+                      <!-- Item-->
+                      <div class="pb-2">
+                        <div class="card card-curved-body shadow card-slide mx-1">
+                          <div class="card-slide-inner">
+                             {% image item.featured_image width-300 as img %}
+                            <img class="card-img" src="{{ img.url }}" alt="Portfolio thumb">
+                            <a class="card-body text-center" href="{{ item.url }}">
+                              <h3 class="h5 nav-heading mt-1 mb-2">{{ item.title }}</h3>
+                              <p class="fs-sm text-muted mb-1">{{ item.subtitle }}</p>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </section> <!-- Related projects (Carousel)-->
+
+            {% endblock page_content %}
+
+            {% block vendor_scripts %}
+            <script src="{% static 'js/tiny-slider.js' %}"></script> {# Image carousels #}
+            <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script> {# Image carousels #}
+            <script src="{% static 'js/shuffle.min.js' %}"></script> {# Image carousels #}
+            <script src="{% static 'js/parallax.min.js' %}"></script> {# Parallax effect #}
+            <script src="{% static 'js/lightgallery.min.js' %}"></script> {# Lightgallery #}
+            <script src="{% static 'js/lg-fullscreen.min.js' %}"></script> {# Lightgallery #}
+            <script src="{% static 'js/lg-zoom.min.js' %}"></script> {# Lightgallery #}
+            <script src="{% static 'js/lg-video.min.js' %}"></script> {# Lightgallery #}
+            {% endblock vendor_scripts %}

@@ -68,6 +68,8 @@ DJANGO_APPS = [
 WAGTAIL_APPS = [
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.modeladmin",
+    "wagtail.contrib.settings",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -96,6 +98,12 @@ LOCAL_APPS = [
     "devfolio.users",
 ]
 LOCAL_WAGTAIL_APPS = [
+    "home",
+    "blog",
+    "portfolio",
+    "testimonials",
+    "menus",
+    "site_settings",
     "streams",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

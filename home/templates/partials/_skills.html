@@ -1,0 +1,7 @@
+            {% load static i18n wagtailcore_tags %}
+
+            <section id="skills" class="container mb-3 my-md-0 py-5 py-md-6">
+              {% for block in page.skills  %}
+                {% include_block block %}
+              {% endfor %}
+            </section>

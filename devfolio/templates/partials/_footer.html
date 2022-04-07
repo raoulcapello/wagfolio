@@ -1,0 +1,49 @@
+    {% load static wagtailcore_tags wagtailuserbar menu_tags %}
+    {# Must match Wagtail CMS menu slug (configure if necessary) #}
+    {% get_menu "main" as navigation %}
+
+    <!-- Footer-->
+    <footer class="footer bg-dark pt-5 pt-md-6">
+        <div class="container pt-3 pt-md-0">
+            <div class="row pb-3">
+                <div class="col-lg-4 col-md-4 pe-4 pb-3 pb-md-0 mb-4">
+                    <div class="widget widget-light">
+                        <h4 class="widget-title">Title</h4>
+                        <p class="fs-sm text-light opacity-60 pb-2 pb-sm-3">Subtitle</p>
+                        <a class="btn-social bs-outline bs-linkedin bs-light bs-lg me-2 mb-2" href="{{ settings.site_settings.SocialMediaSettings.linkedin }}" target="_blank" rel="noopener"><i class="ai-linkedin"></i></a>
+                        <a class="btn-social bs-outline bs-github bs-light bs-lg me-2 mb-2" href="{{ settings.site_settings.SocialMediaSettings.github }}" target="_blank" rel="noopener"><i class="ai-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-4 col-sm-4 ms-auto mb-4">
+                    <div class="widget widget-light">
+                        <h4 class="widget-title">Company Details</h4>
+                        <p class="fs-sm text-light opacity-60">
+                            Raoul Capello Web Development & Consultancy
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-4 mb-4">
+                    <div class="widget widget-light">
+                        <h4 class="widget-title">Navigation</h4>
+                        <ul>
+                          {% for menu_item in navigation.menu_items.all %}
+                            {% if not menu_item.disabled %}
+                              <li>
+                                  <a class="widget-link" href="{{ menu_item.link }}" data-scroll>{{ menu_item.title }}</a>
+                              </li>
+                            {% endif %}
+                          {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-0 border-light">
+            <div class="row align-items-center mt-3 py-4">
+                <div class="col-md-6 order-md-1 mb-3">
+                    <p class="fs-sm mb-0">
+                        <span class="text-light opacity-50 me-1">Made by</span><a class="nav-link-style nav-link-light" href="/">Raoul Capello</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>

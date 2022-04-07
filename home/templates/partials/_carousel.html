@@ -1,0 +1,33 @@
+{% load static i18n wagtailimages_tags %}
+ <section id="skills" class="container my-5 my-md-0">
+     <div class="row">
+         <div class="col-lg-8 mx-auto">
+
+             <!-- Default Image Carousel -->
+             <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+                 <ol class="carousel-indicators">
+                  {% for item in self.carousel_images.all %}
+                     <li data-bs-target="#imageCarousel" data-bs-slide-to="{{ forloop.counter0 }}"{% if forloop.counter0 == 0 %} class="active"{% endif %}></li>
+                  {% endfor %}
+                 </ol>
+                 <div class="carousel-inner">
+                  {% for item in self.carousel_images.all %}
+                    {% image item.carousel_image fill-900x400 as img %}
+                     <div class="carousel-item{% if forloop.counter0 == 0 %} active{% endif %}">
+                         <img src="{{ img.url }}" alt="Image">
+                     </div>
+                  {% endfor %}
+                 </div>
+                 <a class="carousel-control-prev" href="#imageCarousel" role="button" data-bs-slide="prev">
+                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                     <span class="visually-hidden">Previous</span>
+                 </a>
+                 <a class="carousel-control-next" href="#imageCarousel" role="button" data-bs-slide="next">
+                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                     <span class="visually-hidden">Next</span>
+                 </a>
+             </div>
+
+         </div> <!-- /.col -->
+     </div> <!-- /.row -->
+ </section> <!-- /.container -->

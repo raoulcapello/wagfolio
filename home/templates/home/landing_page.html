@@ -1,0 +1,42 @@
+            {% extends "base.html" %}
+
+            {% load static wagtailcore_tags wagtailimages_tags %}
+
+            {% block vendor_styles %}
+              <link rel="stylesheet" href="{% static 'css/tiny-slider.css' %}">
+            {% endblock vendor_styles %}
+
+            {% block page_content %}
+            <!-- Page content -->
+
+              {% if page.carousel_enabled %}
+                <!-- Carousel Section -->
+                {% include 'partials/_carousel.html' %}
+              {% endif %}
+
+              {% comment %}
+              {% if page.hero %}
+                <!-- Hero Section -->
+                {% for block in page.hero %}
+                  {% include_block block %}
+                {% endfor %}
+              {% endif %}
+              {% endcomment %}
+
+              {% include 'partials/_hero.html' %}
+
+              {% if page.body %}
+                <!-- Body Section -->
+                {% for block in page.body %}
+                    {% include_block block %}
+                {% endfor %}
+              {% endif %}
+
+            {% endblock page_content %}
+
+            {% block vendor_scripts %}
+            <script src="{% static 'js/tiny-slider.js' %}"></script> {# Image carousels #}
+            <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script> {# Image carousels #}
+            <script src="{% static 'js/shuffle.min.js' %}"></script> {# Image carousels #}
+            <script src="{% static 'js/parallax.min.js' %}"></script> {# Parallax effect #}
+            {% endblock vendor_scripts %}

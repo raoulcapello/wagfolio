@@ -1,0 +1,65 @@
+            {% extends "base.html" %}
+
+            {% load static i18n wagtailcore_tags wagtailimages_tags %}
+
+            {% block vendor_styles %}
+              <link rel="stylesheet" href="{% static 'css/tiny-slider.css' %}">
+            {% endblock vendor_styles %}
+
+            {% block navbar %}
+              {% include 'partials/_navbar_top_dark.html' %}
+            {% endblock navbar %}
+
+            {% block messages %}{% endblock messages %}
+
+            {% block page_content %}
+              <!-- Page content-->
+
+              <!-- Page title-->
+              <section class="position-relative bg-dark pt-7 pb-5 pb-md-7 bg-size-cover bg-attachment-fixed" style="background-image: url(img/demo/web-studio/cubes-bg.jpg); margin-top: -35px;">
+                <div class="shape shape-bottom shape-curve bg-body">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+                    <path fill="currentColor" d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+                  </svg>
+                </div>
+                <div class="container position-relative zindex-5 text-center pt-md-6 pt-lg-7 py-5 my-lg-3">
+                  <h1 class="text-light mb-0">{{ page.title }}<span class="h2 d-inline-block bg-faded-primary text-primary px-3 py-2 rounded-3 ms-3">{{ page.subtitle }}</span></h1>
+                </div>
+              </section>
+
+              <!-- Portfolio grid-->
+              <section class="container overflow-hidden py-5 py-md-6 py-lg-7" style="min-height: 800px;">
+                <div class="masonry-filterable">
+                  <ul class="masonry-filters nav nav-tabs justify-content-center mt-2 pb-4">
+                    <li class="nav-item"><a class="nav-link active" href="#" data-group="all">All</a></li>
+                    {# Iterate over categories, from context #}
+                    {% for category in categories %}
+                    <li class="nav-item"><a class="nav-link" href="#" data-group="{{ category.name }}">{{ category.name }}</a></li>
+                    {% endfor %}
+                  </ul>
+                  <div class="masonry-grid" data-columns="4">
+                    {% for item in portfolio_items  %}
+                      <!-- Portfolio item-->
+                      <div class="masonry-grid-item" data-groups="[{% for category in item.categories.all %}&quot;{{ category.name }}&quot;{% if forloop.revcounter != 1 %}, {% endif %}{% endfor %}]">
+                        <div class="card card-curved-body shadow card-slide">
+                          <div class="card-slide-inner">
+                            {% image item.featured_image width-800 as img %}
+                            <img class="card-img" src="{{ img.url }}" alt="Portfolio thumb">
+                            <a class="card-body text-center" href="{{ item.url }}">
+                                <p class="fs-sm text-muted mb-1">{{ item.subtitle }}</p>
+                            </a>
+                          </div>
+                        </div>
+                      </div> <!-- Portfolio item-->
+                    {% endfor %}
+                  </div>
+                </div> <!-- /.masonry-filterable -->
+              </section>
+            {% endblock page_content %}
+
+            {% block vendor_scripts %}
+            <script src="{% static 'js/tiny-slider.js' %}"></script> {# Image carousels #}
+            <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script> {# Image carousels #}
+            <script src="{% static 'js/shuffle.min.js' %}"></script> {# Image carousels #}
+            <script src="{% static 'js/parallax.min.js' %}"></script> {# Parallax effect #}
+            {% endblock vendor_scripts %}

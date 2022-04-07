@@ -1,0 +1,16 @@
+            {% load static i18n wagtailcore_tags %}
+
+            <section id="quote" class="container mb-3 my-md-0 py-5 py-md-6">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-7 order-md-1 order-2 mx-auto">
+                            <blockquote class="blockquote mt-3 mb-0">
+                                <p>{{ self.quote }}.</p>
+                                <footer class="d-flex align-items-center"><img class="rounded-circle" src="{% static 'img/01.jpg' %}" alt="{{ self.attribution }}" width="42">
+                                    <div class="text-heading fs-md fw-medium ps-2 ms-1">{{ self.attribution }}</div>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </section>

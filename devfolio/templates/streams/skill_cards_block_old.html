@@ -1,0 +1,26 @@
+        <section class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+
+                    <!-- Masonry grid -->
+                    <div class="masonry-grid" data-columns="6">
+
+                        {% for card in self.skill_cards  %}
+                        <!-- Item -->
+                        <div class="masonry-grid-item">
+                            <div class="card card-hover">
+
+                                <div class="card-body text-center">
+                                    {% comment %} <h5 class="card-title">{{ card.skill }}</h5> {% endcomment %}
+                                    <p class="card-text fs-sm">{{ card.skill }}</p>
+
+                                </div> <!-- /.card-body -->
+                            </div> <!-- /.card -->
+                        </div> <!-- /.masonry-grid-item -->
+                        {% endfor %}
+
+                    </div> <!-- /.masonry-grid -->
+
+                </div> <!-- /.col -->
+            </div> <!-- /.row -->
+        </section> <!-- /.container -->

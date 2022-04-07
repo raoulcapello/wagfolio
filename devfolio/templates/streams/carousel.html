@@ -1,0 +1,8 @@
+                        {% load static i18n wagtailimages_tags %}
+                        {% image self width-1280 as img  %}
+                        {% comment %} <a class="gallery-item rounded-3 mb-grid-gutter" href="{{ img.url }}"><img src="{{ img.url }}" alt="Gallery thumbnail"></a> {% endcomment %}
+                        <div class="col-sm-6 mb-grid-gutter">
+                          <a class="gallery-item rounded-3" href="{{ img.url }}">
+                            <img src="{{ img.url }}" alt="Gallery thumbnail">
+                          </a>
+                        </div>

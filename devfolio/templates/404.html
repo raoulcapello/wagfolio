@@ -2,8 +2,10 @@
 
 {% block title %}Page not found{% endblock %}
 
-{% block content %}
-<h1>Page not found</h1>
+{% block body_class %}template-404{% endblock %}
 
-<p>{% if exception %}{{ exception }}{% else %}This is not the page you were looking for.{% endif %}</p>
-{% endblock content %}
+{% block content %}
+    <h1>Page not found</h1>
+
+    <h2>Sorry, this page could not be found.</h2>
+{% endblock %}

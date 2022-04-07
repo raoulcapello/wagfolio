@@ -1,0 +1,189 @@
+            {% extends "base.html" %}
+
+            {% load static wagtailcore_tags wagtailimages_tags %}
+
+            {% block vendor_styles %}
+            <link rel="stylesheet" media="screen" href="{% static 'css/tiny-slider.css' %}" />
+            <link rel="stylesheet" media="screen" href="{% static 'css/lightgallery.min.css' %}" />
+            {% endblock vendor_styles %}
+
+            {% block page_content %}
+
+            <!-- Page content-->
+            <div class="container">
+                <div class="row justify-content-center">
+                    <!-- Content-->
+                    <div class="col-lg-9 py-4 mb-2 mb-sm-0 pb-sm-5">
+                        <div class="pb-4" style="max-width: 38rem;">
+                            <nav aria-label="breadcrumb">
+                                <ol class="py-1 my-2 breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% slugurl 'home' %}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{% slugurl 'blog' %}">Blog</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">&nbsp;</li>
+                                </ol>
+                            </nav>
+                            <h1>{{ page.title }}</h1>
+                        </div>
+                        <!-- Post author + Sharing -->
+                        <div class="row position-relative g-0 align-items-center border-top border-bottom mb-4">
+                            <div class="col-md-6 py-3 pe-md-3">
+                                <div class="d-flex align-items-center justify-content-center justify-content-md-start">
+                                    <div class="d-flex align-items-center me-grid-gutter">
+                                        <a class="d-block" href="#">
+                                            <img class="rounded-circle me-1" src="{{ page.owner.wagtail_userprofile.avatar.url }}" alt="{{ page.owner }}" width="64">
+                                        </a>
+                                         <!-- Author -->
+                                        <div class="ps-2">
+                                            <h6 class="nav-heading mb-1"><a href="#">{{ page.owner.first_name }} {{ page.owner.last_name }}</a></h6>
+                                            <div class="text-nowrap">
+                                                <div class="meta-link fs-xs"><i class="ai-calendar me-1 align-vertical"></i>{{ page.date }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-none d-md-block position-absolute border-start h-100" style="top: 0; left: 50%; width: 1px;"></div>
+                            <!-- Sharing -->
+                            <div class="col-md-6 ps-md-3 py-3">
+                                <div class="d-flex align-items-center justify-content-center justify-content-md-end">
+                                    <h6 class="text-nowrap my-2 me-3">Share post:</h6><a class="btn-social bs-outline bs-facebook ms-2 my-2" href="#"><i class="ai-facebook"></i></a><a class="btn-social bs-outline bs-twitter ms-2 my-2" href="#"><i class="ai-twitter"></i></a><a class="btn-social bs-outline bs-google ms-2 my-2" href="#"><i class="ai-google"></i></a><a class="btn-social bs-outline bs-email ms-2 my-2" href="#"><i class="ai-mail"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Post content-->
+                        {% if page.body %}
+                          <p class="py-3">{{ page.body|richtext }}</p>
+                        {% endif %}
+                        <p class="py-3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum.</p>
+                        <!-- Featured Image -->
+                        {% image page.main_image fill-1080x640 as main_image %}
+                        <img src="{{ main_image.url }}" class="rounded-3">
+                        <p class="py-3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum.</p>
+                        <!-- Image Carousel -->
+                        <h2 class="h3 pt-2 pb-4">Some real life examples</h2>
+
+                        {% if page.gallery_images.all %}
+                            <div class="tns-carousel-wrapper gallery">
+                                <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1, &quot;gutter&quot;: 20},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 20}, &quot;700&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 30}}}">
+
+                                  {% for item in page.gallery_images.all %}
+                                    {% image item.image fill-800x640 as image %}
+                                      <div>
+                                        <a class="gallery-item rounded-3" href="{{ image.url }}" data-sub-html="&lt;h6 class=&quot;fs-sm text-light&quot;&gt;{{ item.caption }}&lt;/h6&gt;">
+                                          <img src="{{ image.url }}" alt="Gallery thumbnail">
+                                          <span class="gallery-caption">{{ item.caption }}</span>
+                                        </a>
+                                      </div>
+                                  {% endfor %}
+
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <div class="py-4">
+                            <p class="pt-3">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
+                        <h2 class="h3 pt-1 pb-4">Expert opinion</h2>
+                        <div class="bg-faded-primary rounded-3 p-4 mb-4">
+                            <div class="p-md-3">
+                                <blockquote class="blockquote mb-0">
+                                    <p class="text-nav">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida dignissimos ducimus qui blanditiis praesentium voluptatum.</p>
+                                    <p class="text-nav">Mattis enim ut tellus elementum sagittis vitae et leo duis.</p>
+                                    <footer class="blockquote-footer">Miguel Sánchez</footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <p class="py-3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum.</p>
+
+                        <!-- Categories + Tags-->
+                        <div class="row g-0 position-relative align-items-center border-top border-bottom my-5">
+                            <div class="col-md-6 py-2 py-dm-3 pe-md-3 text-center text-md-start">
+                                <div class="d-flex align-items-center justify-content-center justify-content-md-start">
+                                  <h6 class="text-nowrap my-2 me-3">Tags</h6>
+                                  <!-- Tags -->
+                                  {% if page.tags.count %}
+                                      {% for tag in page.tags.all  %}
+                                        <a class="btn-tag me-2 my-2" href="{% slugurl 'tags' %}?tag={{ tag }}">#{{ tag }}</a>
+                                      {% endfor %}
+                                  {% endif %}
+                                </div>
+                            </div>
+                            <div class="d-none d-md-block position-absolute border-start h-100" style="top: 0; left: 50%; width: 1px;"></div>
+                            <!-- Sharing -->
+                            <div class="col-md-6 ps-md-3 py-2 py-md-3">
+                                <div class="d-flex align-items-center justify-content-center justify-content-md-end">
+                                    <h6 class="text-nowrap my-2 me-3">Categories</h6>
+                                  <!-- Categories -->
+                                    {% with categories=page.categories.all %}
+                                      {% if categories %}
+                                        {% for category in categories  %}
+                                          <a class="btn-tag me-2 my-2" href="#" style="color: #766df4;">{{ category }}</a>
+                                        {% endfor %}
+                                      {% endif %}
+                                    {% endwith %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Prev / Next post navigation-->
+                        <nav class="d-flex justify-content-between pb-4 mb-5" aria-label="Entry navigation">
+                            {% if page.get_prev_sibling %}
+                            <a class="entry-nav me-3" href="{{ page.get_prev_sibling.url }}">
+                                <h3 class="h5 pb-sm-2">Prev post</h3>
+                                <div class="d-flex align-items-start">
+                                    <div class="entry-nav-thumb flex-shrink-0 d-none d-sm-block">
+                                        {% with page.get_prev_sibling.specific.main_image as main_image  %}
+                                          {% if main_image %}
+                                            {% image page.get_prev_sibling.specific.main_image fill-64x64 as img %}
+                                            <img class="rounded" src="{{ img.url }}" alt="Post thumbnail"></div>
+                                          {% endif %}
+                                        {% endwith %}
+                                    <div class="ps-sm-3">
+                                        <h4 class="nav-heading fs-md fw-medium mb-0">{{ page.get_prev_sibling }}</h4>
+                                        <span class="fs-xs text-muted">by {{ page.get_prev_sibling.owner.first_name }} {{ page.get_prev_sibling.owner.last_name }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            {% else %}
+                            {# Placeholder Div in case there's no previous post #}
+                            <div class="d-flex align-items-start">
+                            </div>
+                            {% endif %}
+                            {% if page.get_next_sibling %}
+                            <a class="entry-nav ms-3" href="{{ page.get_next_sibling.url }}">
+                                <h3 class="h5 pb-sm-2 text-end">Next post</h3>
+                                <div class="d-flex align-items-end justify-content-end">
+                                    <div class="text-end pe-sm-3">
+                                        <h4 class="nav-heading fs-md fw-medium mb-0">{{ page.get_next_sibling.title }}</h4>
+                                        <span class="fs-xs text-muted">by {{ page.get_next_sibling.owner.first_name }} {{ page.get_next_sibling.owner.last_name }}</span>
+                                    </div>
+                                    <div class="entry-nav-thumb flex-shrink-0 d-none d-sm-block">
+                                        {% with page.get_next_sibling.specific.main_image as main_image  %}
+                                          {% if main_image %}
+                                            {% image main_image fill-64x64 as img %}
+                                            <img class="rounded" src="{{ img.url }}" alt="Post thumbnail">
+                                          {% endif %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                            </a>
+                            {% else %}
+                            {# Placeholder Div in case there's no next post #}
+                            <div class="d-flex align-items-start">
+                            </div>
+                            {% endif %}
+                        </nav>
+
+            {% endblock page_content %}
+
+            {% block vendor_scripts %}
+            <script src="{% static 'js/tiny-slider.js' %}"></script>
+            <script src="{% static 'js/lightgallery.min.js' %}"></script>
+            <script src="{% static 'js/lg-fullscreen.min.js' %}"></script>
+            <script src="{% static 'js/lg-zoom.min.js' %}"></script>
+            <script src="{% static 'js/lg-video.min.js' %}"></script>
+            <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+            <script src="{% static 'js/shuffle.min.js' %}"></script>
+            <script src="{% static 'js/parallax.min.js' %}"></script>
+            {% endblock vendor_scripts %}

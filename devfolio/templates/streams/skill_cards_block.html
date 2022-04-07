@@ -1,0 +1,49 @@
+        <section id="skills" class="container my-5 my-md-0 py-5 py-md-6">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+
+                  {# TODO: ignore empty categories  #}
+
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs justify-content-center" role="tablist">
+                    {% for category in skill_categories %}
+                      <li class="nav-item">
+                        <a href="#{{ category.name }}" class="nav-link{% if forloop.counter0 == 0 %} active{% endif %}" data-bs-toggle="tab" role="tab">
+                          <i class="{{ category.css_class }}"></i>
+                            {{  category.name  }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+
+                  <div class="tab-content text-center">
+                  {% for category in skill_categories %}
+                    <!-- Tabs content -->
+                      <div class="tab-pane fade{% if forloop.counter0 == 0 %} show active{% endif %}" id="{{ category }}" role="tabpanel">
+                        <!-- Tag links -->
+                        {% for card in self.skill_cards  %}
+                        <div class="d-flex align-items-center justify-content-center">
+                          {% if card.categories == category %}
+                              <!-- Item -->
+                                  {% if card.icon %}
+                                  <a class="d-block" href="#">
+                                    <img class="rounded" width="64" src="{{ card.icon }}" alt="Post"/>
+                                  </a>
+                                  {% endif %}
+                                  <i class="ai-codesandbox"></i>
+                                  <div class="ps-2 ms-1">
+                                    <h4 class="fs-md nav-heading mb-1">
+                                      <a class="fw-medium" href="#">{{ card.skill }}</a>
+                                    </h4>
+                                    <p class="fs-xs text-muted mb-0">{{ category }}</p>
+                                  </div>
+                          {% endif %}
+                         </div> <!-- /.d-flex -->
+                        {% endfor %}
+                      </div> <!-- /.tab-pane -->
+                  {% endfor %}
+                  </div> <!-- /.tab-content -->
+
+                </div> <!-- /.col -->
+            </div> <!-- /.row -->
+        </section> <!-- /.container -->

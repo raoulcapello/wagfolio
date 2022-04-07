@@ -1,0 +1,33 @@
+              {% load static i18n %}
+              <!-- Testimonial Section -->
+              <section id="testimonials" class="bg-faded-primary position-relative py-md-7 py-5">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-lg-6 col-md-7 order-md-1 order-2">
+                              <!-- Carousel-->
+                              <div class="tns-carousel-wrapper">
+                                  <div class="tns-carousel-inner" data-carousel-options="{&quot;gutter&quot;: 20, &quot;responsive&quot;: {&quot;0&quot;: {&quot;nav&quot;: true, &quot;controls&quot;: false}, &quot;991&quot;: {&quot;nav&quot;: false, &quot;controls&quot;: true}}}">
+                                      {% for testimonial in self.testimonials %}
+                                      <!-- Carousel item-->
+                                      <blockquote class="blockquote mt-3 mb-0">
+                                          <p>{{ testimonial.text }}.</p>
+                                          <p>Consectetur adipisicing elit. Minus facilis asperiores deleniti ipsum quod ipsa voluptate dicta quasi. Dignissimos accusantium temporibus sunt culpa minima, earum reprehenderit aspernatur inventore magnam labore.</p>
+                                          <footer class="d-flex align-items-center"><img class="rounded-circle" src="{% static 'img/01.jpg' %}" alt="{{ testimonial.author }}" width="42">
+                                              <div class="text-heading fs-md fw-medium ps-2 ms-1">{{ testimonial.author }}</div>
+                                          </footer>
+                                      </blockquote>
+                                      {% endfor %}
+                                  </div>
+                              </div> <!-- /.tns-carousel-wrapper -->
+                          </div> <!-- /.col-lg-6 -->
+                          <div class="col-md-5 offset-lg-1 order-md-2 order-1 mb-md-0 mb-grid-gutter">
+                              <img class="d-block mx-md-0 mx-auto" src="{% static 'img/testimonials-illustration.svg' %}" alt="Illustration">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="shape shape-bottom shape-curve bg-body">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+                          <path fill="currentColor" d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+                      </svg>
+                  </div>
+              </section>

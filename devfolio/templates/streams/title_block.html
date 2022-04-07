@@ -1,0 +1,35 @@
+            {% load static i18n wagtailcore_tags wagtailimages_tags %}
+            <!-- Hero Section -->
+            <section class="container mb-3 my-md-0 py-5 py-md-6">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-5 order-md-1 order-2 text-md-start text-center">
+                        <h1 class="display-4 mb-lg-4 mb-3">{{ self.greeting|default:"Greeting or Project Title" }}</h1>
+                        <h2 class="mb-lg-5 mb-4 text-muted">{{ self.lead_text|default:"Project Subtitle" }}</h2>
+                        {% if self.buttons %}
+                          <div class="mb-2">
+                              {% for button in self.buttons.buttons %}
+                                <a class="btn btn-outline-primary mt-2{% if button.disabled %} disabled{% endif %}" href="#{{ button.section_id }}" data-scroll>{{ button.text }}</a>
+                              {% endfor %}
+                          </div>
+                        {% endif %}
+                        {% if self.download_buttons %}
+                          <div class="mb-2">
+                            {% for button in self.download_buttons.buttons %}
+                            <a class="btn btn-translucent-primary mt-2 me-3{% if button.disabled %} disabled{% endif %}" href="#" download target="_blank">
+                                <i class="{{ button.icon }}"></i>
+                                {{ button.text }}
+                            </a>
+                            {% endfor %}
+                          </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-6 col-md-7 order-md-2 order-1 mb-md-0 mb-grid-gutter pe-md-7 text-end" style="z-index: -1;">
+                        {% if self.main_profile_picture %}
+                          {% image self.main_profile_picture fill-380x500 as profile_img %}
+                          <img src="{{ profile_img.url }}" alt="{{ self.title|default:"Project Title" }}">
+                        {% else %}
+                          <img src="{% static 'img/hero-illustration.svg' %}" alt="{{ self.title|default:"Project Title" }}">
+                        {% endif %}
+                    </div>
+                </div>
+            </section>

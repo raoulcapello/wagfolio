@@ -1,0 +1,62 @@
+        {% load static wagtailcore_tags wagtailuserbar menu_tags %}
+        {% get_menu "top-nav" as navigation %}
+
+        <!-- Navbar -->
+        <header class="header navbar navbar-expand-lg navbar-dark navbar-floating navbar-sticky" data-scroll-header data-fixed-element>
+            <div class="container px-0 px-xl-3">
+                <button class="navbar-toggler ms-n2 me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarCollapseMainMenu" id="navbarToggleButton">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand flex-shrink-0 order-lg-1 mx-auto ms-lg-0 pe-lg-2 me-lg-4" href="/">
+                    {% comment %} <img class="d-none d-lg-block" src="#" alt="Logo" width="50"> {% endcomment %}
+                    {% comment %} <img class="d-lg-none" src="#" alt="Logo" width="50"> {% endcomment %}
+                </a>
+                {% if request.user.is_authenticated %}
+                <div class="d-flex align-items-center order-lg-3 ms-lg-auto">
+                    <div class="navbar-tool dropdown">
+                        <a class="navbar-tool-label dropdown-toggle" href="{% url 'admin:index' %}">
+                            <small>Hello,</small>{{ request.user.username|capfirst }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" style="width: 15rem;">
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="/cms/">
+                                    <i class="ai-key fs-base opacity-60 me-2"></i>
+                                    Admin
+                                </a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <i class="ai-log-out fs-base opacity-60 me-2"></i>
+                                    Sign out
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="offcanvas offcanvas-collapse order-lg-2" data-bs-toggle="offcanvas" id="navbarCollapseMainMenu">
+                  <div class="offcanvas-header navbar-shadow">
+                    <h5 class="mt-1 mb-0">Menu</h5>
+                    <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+                  <div class="offcanvas-body">
+                    <!-- Menu-->
+                    <ul class="navbar-nav">
+                      {% for menu_item in navigation.menu_items.all %}
+                        <li class="nav-item active">
+                            <a class="nav-link{% if menu_item.disabled %} disabled{% endif %}" href="{{ menu_item.link }}" {% if menu_item.open_in_new_tab %}target="_blank" {% endif %}data-scroll>{{ menu_item.title }}</a>
+                        </li>
+                      {% endfor %}
+                      {# Small viewports only #}
+                      {% if request.user.is_authenticated %}
+                      <li class="nav-item d-sm-none">
+                          <a class="nav-link" href="#">Sign out</a>
+                      </li>
+                      {% endif %}
+                    </ul>
+                  </div>
+              </div> <!-- /.collapse #navbarCollapseMainMenu -->
+
+            </div> <!-- /.container -->
+        </header> <!-- /.navbar-->

@@ -1,0 +1,8 @@
+                        <div class="text-nowrap mb-3">
+                            {% for button in self.buttons %}
+                            <a class="btn btn-translucent-primary me-3{% if button.disabled %} disabled{% endif %}" href="#" download target="_blank">
+                                <i class="{{ button.icon }}"></i>
+                                {{ button.text }}
+                            </a>
+                            {% endfor %}
+                        </div>
