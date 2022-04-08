@@ -1,6 +1,8 @@
 from django.db import models
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.core.blocks import RichTextBlock
+from wagtail.core.fields import StreamField
 
 
 @register_setting
@@ -25,16 +27,44 @@ class SocialMediaSettings(BaseSetting):
 class CompanyDetailsSettings(BaseSetting):
     """Company details shared across the site."""
 
-    name = models.CharField(max_length=100, blank=True, null=True, default="Company Name")
-    description = models.TextField(
-        max_length=255, blank=True, null=True, default="Company Description"
+    owner = models.CharField(max_length=100, blank=True, null=True, default="Company Name")
+    status = models.TextField(max_length=255, blank=True, null=True, default="Company Description")
+    address = StreamField(
+        [
+            (
+                "address",
+                RichTextBlock(
+                    template="streams/rich_text_block.html",
+                ),
+            ),
+        ],
+        null=True,
+        blank=True,
     )
+    company_ids = StreamField(
+        [
+            (
+                "company_ids",
+                RichTextBlock(
+                    template="streams/rich_text_block.html",
+                ),
+            ),
+        ],
+        null=True,
+        blank=True,
+    )
+    enable_address = models.BooleanField(default=True)
+    enable_company_ids = models.BooleanField(default=True)
 
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel("name"),
-                FieldPanel("description"),
+                FieldPanel("owner"),
+                FieldPanel("status"),
+                FieldPanel("enable_address"),
+                FieldPanel("enable_company_ids"),
+                StreamFieldPanel("address"),
+                StreamFieldPanel("company_ids"),
             ],
             heading="Company Details",
         )
