@@ -37,12 +37,13 @@
                           </div><a class="btn btn-translucent-primary btn-sm ms-auto mb-3 d-inline-block d-lg-none" href="#gallery" data-scroll>Project Gallery</a>
                         </div>
                         <h3 class="h5">Project Details</h3>
-                        <ul class="list-unstyled fs-md mb-4 pb-2">
+                        <ul class="list-unstyled fs-xs mb-4 pb-2">
                           {% if page.live_url %}
                             <!-- Live URL -->
                             <li data-bs-toggle="modal" data-bs-target="#messageModal">
                               <i class="ai-globe" alt="Live URL"></i>
-                              <a class="nav-link-style ms-2" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Check it out live!">react-weather-app.raoulcapello.com</a>
+                              {% comment %} <a class="nav-link-style ms-2" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Check it out live!">{{ page.live_url }}</a> {% endcomment %}
+                              <a class="nav-link-style ms-2" href="{{ page.live_url }}" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Check it out live!">{{ page.live_url }}</a>
                             </li>
                           {% endif %}
 
@@ -50,7 +51,7 @@
                             <!-- Repo URL -->
                             <li>
                               <i class="ai-github"></i>
-                              <a class="nav-link-style ms-2" href="{{ page.repo_url }}" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Check out the source code!">raoulcapello/react-weather-app</a>
+                              <a class="nav-link-style ms-2" href="{{ page.repo_url }}" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Check out the source code!">{{ page.repo_url }}</a>
                             </li>
                           {% endif %}
 
