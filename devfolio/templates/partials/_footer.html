@@ -8,8 +8,8 @@
             <div class="row pb-3">
                 <div class="col-lg-4 col-md-4 pe-4 pb-3 pb-md-0 mb-4">
                     <div class="widget widget-light">
-                        <h4 class="widget-title">{{ page.company_name }}</h4>
-                        <p class="fs-sm text-light opacity-60 pb-2 pb-sm-3">{{ page.company_description }}</p>
+                        <h4 class="widget-title">{{ settings.site_settings.CompanyDetailsSettings.name }}</h4>
+                        <p class="fs-sm text-light opacity-60 pb-2 pb-sm-3">{{  settings.site_settings.CompanyDetailsSettings.description }}</p>
                         <a class="btn-social bs-outline bs-linkedin bs-light bs-lg me-2 mb-2" href="{{ settings.site_settings.SocialMediaSettings.linkedin }}" target="_blank" rel="noopener"><i class="ai-linkedin"></i></a>
                         <a class="btn-social bs-outline bs-github bs-light bs-lg me-2 mb-2" href="{{ settings.site_settings.SocialMediaSettings.github }}" target="_blank" rel="noopener"><i class="ai-github"></i></a>
                     </div>

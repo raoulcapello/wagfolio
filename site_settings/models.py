@@ -19,3 +19,23 @@ class SocialMediaSettings(BaseSetting):
             heading="Social Media Settings",
         )
     ]
+
+
+@register_setting
+class CompanyDetailsSettings(BaseSetting):
+    """Company details shared across the site."""
+
+    name = models.CharField(max_length=100, blank=True, null=True, default="Company Name")
+    description = models.TextField(
+        max_length=255, blank=True, null=True, default="Company Description"
+    )
+
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel("name"),
+                FieldPanel("description"),
+            ],
+            heading="Company Details",
+        )
+    ]
