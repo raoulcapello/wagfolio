@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 from wagtail.core import blocks
+from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.snippets.blocks import SnippetChooserBlock
 
@@ -54,6 +55,7 @@ class DownloadButton(Button):
         help_text="Set a CSS class for the button icon",
         default="ai-arrow-down-circle mt-n1 me-2",
     )
+    document = DocumentChooserBlock(required=False)
 
     # TODO: Add link to Wagtail Documents
 

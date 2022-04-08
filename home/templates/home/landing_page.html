@@ -14,15 +14,6 @@
                 {% include 'partials/_carousel.html' %}
               {% endif %}
 
-              {% comment %}
-              {% if page.hero %}
-                <!-- Hero Section -->
-                {% for block in page.hero %}
-                  {% include_block block %}
-                {% endfor %}
-              {% endif %}
-              {% endcomment %}
-
               {% include 'partials/_hero.html' %}
 
               {% if page.body %}
