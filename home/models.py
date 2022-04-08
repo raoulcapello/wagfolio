@@ -40,14 +40,6 @@ class LandingPage(Page):
     # subpage_types = ["blog.BlogListingPage", "blog.BlogTagIndexPage"]
     max_count = 1
 
-    # hero = StreamField(
-    #     [
-    #         ("hero", blocks.Greeting()),
-    #     ],
-    #     blank=True,
-    #     null=True,
-    #     max_num=1,
-    # )
     greeting = models.CharField(
         max_length=100,
         blank=False,
@@ -107,6 +99,8 @@ class LandingPage(Page):
         blank=True,
         null=True,
     )
+    company_name = models.CharField(max_length=100, blank=True, null=True, default="Company Name")
+    company_description = models.TextField(blank=True, null=True, default="Company Description")
     image_carousel_enabled = models.BooleanField(default=False)
     portfolio_carousel_enabled = models.BooleanField(default=False)
 
@@ -125,6 +119,11 @@ class LandingPage(Page):
 
     body_panels = [
         StreamFieldPanel("body"),
+    ]
+
+    company_panels = [
+        FieldPanel("company_name"),
+        FieldPanel("company_description"),
     ]
 
     image_carousel_panels = [
@@ -147,6 +146,7 @@ class LandingPage(Page):
         [
             ObjectList(content_panels, heading="Header"),
             ObjectList(body_panels, heading="Body"),
+            ObjectList(company_panels, heading="Company"),
             ObjectList(image_carousel_panels, heading="Carousel"),
             ObjectList(Page.promote_panels, heading="Promote"),
             ObjectList(Page.settings_panels, heading="Settings"),

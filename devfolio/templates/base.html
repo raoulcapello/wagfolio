@@ -37,15 +37,19 @@
     {# Global stylesheets #}
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{% static 'css/theme.min.css' %}">
+    {% comment %}
     <!-- project Stylesheet -->
     <link rel="stylesheet" media="screen" href="{% static 'css/project.css' %}">
+    {% endcomment %}
     {% block extra_css %}
     {# Override this in templates to add extra stylesheets #}
     {% endblock %}
     {% endblock %}
+    {% comment %}
     <!-- Le javascript
     ================================================== -->
     <script src="{% static 'js/project.js' %}" defer></script>
+    {% endcomment %}
     {# Placed at the top of the document so pages load faster with defer #}
     {% block javascript %}
     {% endblock javascript %}
