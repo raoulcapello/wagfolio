@@ -15,7 +15,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.blocks import SnippetChooserBlock
 
 from blog.models import SkillCategory
-from portfolio.models import PortfolioDetailPage
+from portfolio.models import PortfolioCategory, PortfolioDetailPage
 from streams import blocks
 
 
@@ -153,6 +153,7 @@ class LandingPage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context["skill_categories"] = SkillCategory.objects.all()
+        context["categories"] = PortfolioCategory.objects.all()
         context["portfolio_items"] = PortfolioDetailPage.objects.all()
 
         return context
