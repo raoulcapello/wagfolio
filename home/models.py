@@ -15,6 +15,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.blocks import SnippetChooserBlock
 
 from blog.models import SkillCategory
+from portfolio.models import PortfolioDetailPage
 from streams import blocks
 
 
@@ -76,6 +77,10 @@ class LandingPage(Page):
     )
     body = StreamField(
         [
+            (
+                "portfolio_carousel",
+                blocks.PortfolioCarousel(),
+            ),
             (
                 "usps",
                 blocks.USPList(),
@@ -148,5 +153,6 @@ class LandingPage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context["skill_categories"] = SkillCategory.objects.all()
+        context["portfolio_items"] = PortfolioDetailPage.objects.all()
 
         return context

@@ -6,6 +6,8 @@ from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.snippets.blocks import SnippetChooserBlock
 
+# from portfolio.models import PortfolioDetailPage
+
 
 class Button(blocks.StructBlock):
 
@@ -279,6 +281,21 @@ class Carousel(blocks.StructBlock):
     images = blocks.ListBlock(
         ImageChooserBlock(),
     )
+
+
+class PortfolioCarousel(blocks.StructBlock):
+    title = blocks.CharBlock(blank=True, null=True)
+
+    class Meta:
+        template = "streams/portfolio_carousel.html"
+
+    # def get_context(self, request, *args, **kwargs):
+    #     context = super().get_context(request, *args, **kwargs)
+    #     context["portfolio_items"] = (
+    #         PortfolioDetailPage.objects.live().public().all().order_by("-created")
+    #     )
+
+    #     return context
 
 
 class PortfolioServices(blocks.StructBlock):

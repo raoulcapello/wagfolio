@@ -1,0 +1,31 @@
+              {% load static i18n wagtailcore_tags wagtailimages_tags %}
+              <!-- Portfolio grid-->
+              <section id="portfolio" class="container overflow-hidden py-5 py-md-6 py-lg-7" style="min-height: 800px;">
+                <h2 class="mb-3 text-center">My portfolio</h2>
+                <p class="mb-4 pb-md-2 text-muted text-center">Most recent projects I have completed</p>
+                <div class="masonry-filterable">
+                  <ul class="masonry-filters nav nav-tabs justify-content-center mt-2 pb-4">
+                    <li class="nav-item"><a class="nav-link active" href="#" data-group="all">All</a></li>
+                    {# Iterate over categories, from context #}
+                    {% for category in categories %}
+                    <li class="nav-item"><a class="nav-link" href="#" data-group="{{ category.name }}">{{ category.name }}</a></li>
+                    {% endfor %}
+                  </ul>
+                  <div class="masonry-grid" data-columns="4">
+                    {% for item in portfolio_items  %}
+                      <!-- Portfolio item-->
+                      <div class="masonry-grid-item" data-groups="[{% for category in item.categories.all %}&quot;{{ category.name }}&quot;{% if forloop.revcounter != 1 %}, {% endif %}{% endfor %}]">
+                        <div class="card card-curved-body shadow card-slide">
+                          <div class="card-slide-inner">
+                            {% image item.featured_image width-800 as img %}
+                            <img class="card-img" src="{{ img.url }}" alt="Portfolio thumb">
+                            <a class="card-body text-center" href="{{ item.url }}">
+                                <p class="fs-sm text-muted mb-1">{{ item.subtitle }}</p>
+                            </a>
+                          </div>
+                        </div>
+                      </div> <!-- Portfolio item-->
+                    {% endfor %}
+                  </div>
+                </div> <!-- /.masonry-filterable -->
+              </section>
