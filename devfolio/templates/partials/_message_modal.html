@@ -1,0 +1,17 @@
+        <!-- Message Modal -->
+        <div class="modal" tabindex="-1" role="dialog" id="messageModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ page.live_url_message_modal_title|default:"For Your Information" }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="fs-sm">{{ page.live_url_popup_text }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal" id="closeModal">Okay</button>
+                    </div>
+                </div>
+            </div>
+        </div>

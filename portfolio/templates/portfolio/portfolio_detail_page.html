@@ -38,23 +38,25 @@
                         </div>
                         <h3 class="h5">Project Details</h3>
                         <ul class="list-unstyled fs-xs mb-4 pb-2">
-                          {% if page.live_url %}
-                            <!-- Live URL -->
-                            <li data-bs-toggle="modal" data-bs-target="#messageModal">
+                          {% if page.live_url and page.live_url_popup_text %}
+                          <li data-bs-toggle="modal" data-bs-target="#messageModal">
                               <i class="ai-globe" alt="Live URL"></i>
-                              {% comment %} <a class="nav-link-style ms-2" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Check it out live!">{{ page.live_url }}</a> {% endcomment %}
-                              <a class="nav-link-style ms-2" href="{{ page.live_url }}" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Check it out live!">{{ page.live_url }}</a>
+                              <a class="nav-link-style ms-2" data-bs-toggle="tooltip" data-bs-placement="right" title="Check it out live!">{{ page.live_url_name }}</a>
+                          </li>
+                          {% elif page.live_url %}
+                            <!-- Live URL -->
+                            <li>
+                              <i class="ai-globe" alt="Live URL"></i>
+                              <a class="nav-link-style ms-2" href="{{ page.live_url }}" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Check it out live!">{{ page.live_url_name }}</a>
                             </li>
                           {% endif %}
-
                           {% if page.repo_url %}
                             <!-- Repo URL -->
                             <li>
                               <i class="ai-github"></i>
-                              <a class="nav-link-style ms-2" href="{{ page.repo_url }}" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Check out the source code!">{{ page.repo_url }}</a>
+                              <a class="nav-link-style ms-2" href="{{ page.repo_url }}" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Check out the source code!">{{ page.repo_url_name }}</a>
                             </li>
                           {% endif %}
-
                         </ul>
                         {% for block in page.text %}
                           {% include_block block %}
@@ -99,6 +101,12 @@
 
             {% endblock page_content %}
 
+            {% if page.live_url_popup %}
+              {% block modal %}
+                {% include 'partials/_message_modal.html' %}
+              {% endblock modal %}
+            {% endif %}
+
             {% block vendor_scripts %}
             <script src="{% static 'js/tiny-slider.js' %}"></script> {# Image carousels #}
             <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script> {# Image carousels #}
@@ -109,3 +117,17 @@
             <script src="{% static 'js/lg-zoom.min.js' %}"></script> {# Lightgallery #}
             <script src="{% static 'js/lg-video.min.js' %}"></script> {# Lightgallery #}
             {% endblock vendor_scripts %}
+
+            {% if page.live_url_popup_text %}
+              {% block inline_javascript %}
+              <script>
+                  // When user closes the modal, open the project demo URL in
+                  // a new tab/window (depends on user's browser setting).
+                  document.querySelector('#closeModal').addEventListener(
+                      "click", () => {
+                          window.open('{{ page.live_url }}', '_blank');
+                      }
+                  );
+              </script>
+              {% endblock inline_javascript %}
+            {% endif %}

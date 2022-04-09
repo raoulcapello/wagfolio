@@ -76,7 +76,19 @@ class PortfolioDetailPage(Page):
         blank=True,
         null=True,
     )
+    live_url_name = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+    )
+    live_url_popup = models.BooleanField(default=False)
+    live_url_popup_text = models.TextField(max_length=250, blank=True, null=True, default="")
     repo_url = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+    )
+    repo_url_name = models.CharField(
         max_length=100,
         blank=True,
         null=True,
@@ -118,9 +130,19 @@ class PortfolioDetailPage(Page):
         MultiFieldPanel(
             [
                 FieldPanel("live_url"),
+                FieldPanel("live_url_name"),
+                FieldPanel("live_url_popup"),
+                FieldPanel("live_url_popup_text"),
+            ],
+            heading="Live URL",
+        ),
+        MultiFieldPanel(
+            [
                 FieldPanel("repo_url"),
-            ]
-        )
+                FieldPanel("repo_url_name"),
+            ],
+            heading="Repo URL",
+        ),
     ]
 
     text_panels = [
