@@ -289,14 +289,6 @@ class PortfolioCarousel(blocks.StructBlock):
     class Meta:
         template = "streams/portfolio_carousel.html"
 
-    # def get_context(self, request, *args, **kwargs):
-    #     context = super().get_context(request, *args, **kwargs)
-    #     context["portfolio_items"] = (
-    #         PortfolioDetailPage.objects.live().public().all().order_by("-created")
-    #     )
-
-    #     return context
-
 
 class PortfolioServices(blocks.StructBlock):
     """Services provided for a portfolio item."""

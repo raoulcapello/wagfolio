@@ -10,6 +10,7 @@
                     <div class="col-lg-9">
                         <nav aria-label="breadcrumb">
                             <ol class="py-1 my-2 breadcrumb">
+                                {# Note: Requires 'home' slug to exist #}
                                 <li class="breadcrumb-item"><a href="{% slugurl 'home' %}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="{% pageurl page %}">{{ page.title }}</a></li>
 
@@ -35,7 +36,9 @@
                                         <a href="{{ post.url }}">{{ post.title }}</a>
                                     </h2>
                                     <a class="d-flex meta-link fs-sm align-items-center pt-3" href="#">
-                                        <img class="rounded-circle" src="{{ post.owner.wagtail_userprofile.avatar.url }}" alt="{{ post.owner }}" width="36">
+                                        {# TODO: Fix issue where no user avatar results in error #}
+                                        {# Error: ValueError at /blog/ The 'avatar' attribute has no file associated with it. #}
+                                        {% comment %} <img class="rounded-circle" src="{{ post.owner.wagtail_userprofile.avatar.url }}" alt="{{ post.owner }}" width="36"> {% endcomment %}
                                         <div class="ps-2 ms-1 mt-n1">by<span class="fw-semibold ms-1">{{ post.owner.first_name }} {{ post.owner.last_name }}</span></div>
                                     </a>
                                     <div class="mt-3 text-end text-nowrap">

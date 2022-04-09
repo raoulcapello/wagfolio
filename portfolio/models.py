@@ -178,7 +178,6 @@ class PortfolioDetailPage(Page):
         return context
 
 
-# TODO: PortfolioCategory
 @register_snippet
 class PortfolioCategory(models.Model):
     name = models.CharField(max_length=100)

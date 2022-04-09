@@ -121,8 +121,10 @@
             {% if page.live_url_popup_text %}
               {% block inline_javascript %}
               <script>
-                  // When user closes the modal, open the project demo URL in
-                  // a new tab/window (depends on user's browser setting).
+                  // When a user closes the modal with the 'Okay' button, open
+                  // the project demo URL in a new tab/window (depending on a
+                  // user's browser setting).
+                  // Does nothing when the user clicks the close ('X') button.
                   document.querySelector('#closeModal').addEventListener(
                       "click", () => {
                           window.open('{{ page.live_url }}', '_blank');
