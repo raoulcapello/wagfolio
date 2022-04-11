@@ -4,6 +4,7 @@ A Portfolio Manager for Web Developers & Designers
 
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+[![Better Uptime Badge](https://betteruptime.com/status-badges/v1/monitor/8r6a.svg)](https://betteruptime.com/?utm_source=status_badge)
 
 License: GPLv3
 
