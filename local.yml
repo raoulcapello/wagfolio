@@ -3,6 +3,8 @@ version: '3'
 volumes:
   devfolio_local_postgres_data: {}
   devfolio_local_postgres_data_backups: {}
+  devfolio_local_postgres_dev_db_data: {}
+  devfolio_local_postgres_dev_db_data_backups: {}
 
 services:
   postgres:
@@ -19,6 +21,19 @@ services:
     env_file:
       - ./.envs/.local/.postgres
 
+  postgres_dev:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: devfolio_production_postgres
+    container_name: devfolio_local_postgres_dev_db
+    volumes:
+      - devfolio_local_postgres_dev_db_data:/var/lib/postgresql/data:Z
+      - devfolio_local_postgres_dev_db_data_backups:/backups:z
+    ports:
+      - "8432:5432"
+    env_file:
+      - ./.envs/.local/.postgres
   #   django:
   #     build:
   #       context: .
