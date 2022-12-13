@@ -46,7 +46,7 @@ class PortfolioListingPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context["portfolio_items"] = PortfolioDetailPage.objects.live().public()
+        context["portfolio_items"] = PortfolioDetailPage.objects.live().public().order_by("-date")
         context["categories"] = PortfolioCategory.objects.all()
 
         return context
@@ -168,10 +168,7 @@ class PortfolioDetailPage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         portfolio_items = (
-            PortfolioDetailPage.objects.live()
-            .public()
-            .order_by("-first_published_at")
-            .exclude(id=self.id)
+            PortfolioDetailPage.objects.live().public().order_by("-date").exclude(id=self.id)
         )
         context["portfolio_items"] = portfolio_items
 

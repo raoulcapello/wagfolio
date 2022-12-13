@@ -154,6 +154,6 @@ class LandingPage(Page):
         context = super().get_context(request, *args, **kwargs)
         context["skill_categories"] = SkillCategory.objects.all()
         context["categories"] = PortfolioCategory.objects.all()
-        context["portfolio_items"] = PortfolioDetailPage.objects.all()
+        context["portfolio_items"] = PortfolioDetailPage.objects.live().public().order_by("-date")
 
         return context
