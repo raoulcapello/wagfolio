@@ -5,13 +5,11 @@ from wagtail.admin.edit_handlers import (
     FieldPanel,
     MultiFieldPanel,
     ObjectList,
-    StreamFieldPanel,
     TabbedInterface,
 )
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 
 from streams import blocks
@@ -99,6 +97,7 @@ class PortfolioDetailPage(Page):
         ],
         blank=True,
         null=True,
+        use_json_field=True,
     )
     body = StreamField(
         [
@@ -111,6 +110,7 @@ class PortfolioDetailPage(Page):
         ],
         blank=True,
         null=True,
+        use_json_field=True,
     )
     date = models.DateField(blank=True, null=True)
     categories = ParentalManyToManyField("portfolio.PortfolioCategory", blank=True)
@@ -146,12 +146,12 @@ class PortfolioDetailPage(Page):
     ]
 
     text_panels = [
-        StreamFieldPanel("text"),
+        FieldPanel("text"),
     ]
 
     image_panels = [
-        ImageChooserPanel("featured_image"),
-        StreamFieldPanel("body"),
+        FieldPanel("featured_image"),
+        FieldPanel("body"),
     ]
 
     edit_handler = TabbedInterface(

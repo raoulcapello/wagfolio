@@ -5,13 +5,11 @@ from wagtail.admin.edit_handlers import (
     InlinePanel,
     MultiFieldPanel,
     ObjectList,
-    StreamFieldPanel,
     TabbedInterface,
 )
 from wagtail.core.fields import StreamBlock, StreamField
 from wagtail.core.models import Orderable, Page
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.blocks import SnippetChooserBlock
 
 from blog.models import SkillCategory
@@ -32,7 +30,7 @@ class HomePageCarouselImages(Orderable):
     )
 
     panels = [
-        ImageChooserPanel("carousel_image"),
+        FieldPanel("carousel_image"),
     ]
 
 
@@ -64,6 +62,7 @@ class LandingPage(Page):
         ],
         blank=True,
         null=True,
+        use_json_field=True,
     )
     download_buttons = StreamField(
         [
@@ -74,6 +73,7 @@ class LandingPage(Page):
         ],
         blank=True,
         null=True,
+        use_json_field=True,
     )
     body = StreamField(
         [
@@ -103,6 +103,7 @@ class LandingPage(Page):
         ],
         blank=True,
         null=True,
+        use_json_field=True,
     )
     image_carousel_enabled = models.BooleanField(default=False)
     portfolio_carousel_enabled = models.BooleanField(default=False)
@@ -112,16 +113,16 @@ class LandingPage(Page):
             [
                 FieldPanel("greeting"),
                 FieldPanel("lead_text"),
-                ImageChooserPanel("main_profile_picture"),
-                StreamFieldPanel("buttons"),
-                StreamFieldPanel("download_buttons"),
+                FieldPanel("main_profile_picture"),
+                FieldPanel("buttons"),
+                FieldPanel("download_buttons"),
             ],
             heading="Hero Section",
         )
     ]
 
     body_panels = [
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
     ]
 
     image_carousel_panels = [

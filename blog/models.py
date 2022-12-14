@@ -14,7 +14,6 @@ from wagtail.admin.edit_handlers import (
 )
 from wagtail.core.fields import RichTextField
 from wagtail.core.models import Orderable, Page
-from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
@@ -134,7 +133,7 @@ class BlogPageGalleryImage(Orderable):
     caption = models.CharField(max_length=250, blank=True)
 
     panels = [
-        ImageChooserPanel("image"),
+        FieldPanel("image"),
         FieldPanel("caption"),
     ]
 
@@ -177,7 +176,7 @@ class BlogCategory(models.Model):
 
     panels = [
         FieldPanel("name"),
-        ImageChooserPanel("icon"),
+        FieldPanel("icon"),
     ]
 
     def __str__(self):

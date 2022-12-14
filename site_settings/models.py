@@ -1,5 +1,5 @@
 from django.db import models
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core.blocks import RichTextBlock
 from wagtail.core.fields import StreamField
@@ -40,6 +40,7 @@ class CompanyDetailsSettings(BaseSetting):
         ],
         null=True,
         blank=True,
+        use_json_field=True,
     )
     company_ids = StreamField(
         [
@@ -52,6 +53,7 @@ class CompanyDetailsSettings(BaseSetting):
         ],
         null=True,
         blank=True,
+        use_json_field=True,
     )
     enable_address = models.BooleanField(default=True)
     enable_company_ids = models.BooleanField(default=True)
@@ -63,8 +65,8 @@ class CompanyDetailsSettings(BaseSetting):
                 FieldPanel("status"),
                 FieldPanel("enable_address"),
                 FieldPanel("enable_company_ids"),
-                StreamFieldPanel("address"),
-                StreamFieldPanel("company_ids"),
+                FieldPanel("address"),
+                FieldPanel("company_ids"),
             ],
             heading="Company Details",
         )

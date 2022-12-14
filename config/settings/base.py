@@ -331,6 +331,8 @@ SPECTACULAR_SETTINGS = {
 # ------------------------------------------------------------------------------
 WAGTAIL_SITE_NAME = "Devfolio"
 
+WAGTAILADMIN_BASE_URL = "https://www.raoulcapello.nl/cms/"
+
 WAGTAILSEARCH_BACKENDS = {
     "default": {
         "BACKEND": "wagtail.search.backends.database",
