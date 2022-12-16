@@ -41,7 +41,7 @@
                           {% if page.live_url and page.live_url_popup_text %}
                           <li data-bs-toggle="modal" data-bs-target="#messageModal">
                               <i class="ai-globe" alt="Live URL"></i>
-                              <a class="nav-link-style ms-2" data-bs-toggle="tooltip" data-bs-placement="right" title="Check it out live!">{{ page.live_url_name }}</a>
+                              <a class="nav-link-style ms-2" data-bs-toggle="tooltip" data-bs-placement="right" title="Check it out live!" style="cursor: pointer;">{{ page.live_url_name }}</a>
                           </li>
                           {% elif page.live_url %}
                             <!-- Live URL -->
