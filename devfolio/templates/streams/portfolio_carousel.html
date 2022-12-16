@@ -20,7 +20,8 @@
                             {% image item.featured_image width-800 as img %}
                             <img class="card-img" src="{{ img.url }}" alt="Portfolio thumb">
                             <a class="card-body text-center" href="{{ item.url }}">
-                                <p class="fs-sm text-muted mb-1">{{ item.subtitle }}</p>
+                              <h3 class="h5 nav-heading mt-1 mb-2">{{ item.title }}</h3>
+                              <p class="fs-sm text-muted mb-1">{{ item.subtitle }}</p>
                             </a>
                           </div>
                         </div>
