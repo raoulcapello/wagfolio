@@ -26,7 +26,11 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
 
+    <!-- Favicon-->
     <link rel="icon" href="{% static 'img/favicons/favicon.ico' %}">
+
+    <!-- Canonical URLs -->
+    <link rel="canonical" href="https://www.raoulcapello.com{{ request.get_full_path }}">
 
     {% block css %}
     <!-- Vendor Styles-->
