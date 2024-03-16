@@ -25,3 +25,6 @@ drf-spectacular==0.22.0  # https://github.com/tfranzel/drf-spectacular
 # Wagtail
 # ------------------------------------------------------------------------------
 wagtail>=4.1,<4.2 # https://docs.wagtail.org/
+certifi>=2023.7.22 # not directly required, pinned by Snyk to avoid a vulnerability
+pyjwt>=2.4.0 # not directly required, pinned by Snyk to avoid a vulnerability
+requests>=2.31.0 # not directly required, pinned by Snyk to avoid a vulnerability
