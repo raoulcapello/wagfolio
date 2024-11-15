@@ -1,29 +1,28 @@
-            {% load static i18n wagtailcore_tags wagtailimages_tags %}
-            <section class="container mb-3 my-md-0 py-5 py-md-6">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-5 order-md-1 order-2 text-md-start text-center">
-                        <h1 class="display-4 mb-lg-4 mb-3">{{ page.greeting|default:"Greeting or Project Title" }}</h1>
-                        <h2 class="mb-lg-5 mb-4 text-muted">{{ page.lead_text|default:"Project Subtitle" }}</h2>
-                        <!-- Jump-To-Section buttons -->
-                        <div>
-                            {% for button in page.buttons %}
-                              {{ button }}
-                            {% endfor %}
-                        </div>
-                        <!-- Download buttons -->
-                        <div>
-                            {% for button in page.download_buttons %}
-                              {{ button }}
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-7 order-md-2 order-1 mb-md-0 mb-grid-gutter pe-md-7 text-end" style="z-index: -1;">
-                        {% if page.main_profile_picture %}
-                          {% image page.main_profile_picture fill-380x500 as profile_img %}
-                          <img src="{{ profile_img.url }}" alt="{{ page.title|default:"Project Title" }}">
-                        {% else %}
-                          <img src="{% static 'img/hero-illustration.svg' %}" alt="{{ page.title|default:"Project Title" }}">
-                        {% endif %}
-                    </div>
-                </div>
-            </section>
+{% load static i18n wagtailcore_tags wagtailimages_tags %}
+<section class="container mb-3 my-md-0 py-5 py-md-6">
+  <div class="row align-items-center">
+    <div class="col-lg-6 col-md-5 order-md-1 order-2 text-md-start text-center">
+      <h1 class="display-4 mb-lg-4 mb-3">{{ page.greeting|default:"Greeting or Project Title" }}</h1>
+      <h2 class="mb-lg-5 mb-4 text-muted">{{ page.lead_text|default:"Project Subtitle" }}</h2>
+      <!-- Jump-To-Section buttons -->
+      <div>
+        {% for button in page.buttons %}{{ button }}{% endfor %}
+      </div>
+      <!-- Download buttons -->
+      <div>
+        {% for button in page.download_buttons %}{{ button }}{% endfor %}
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-7 order-md-2 order-1 mb-md-0 mb-grid-gutter pe-md-7 text-center"
+         style="z-index: -1">
+      {% if page.main_profile_picture %}
+        {% image page.main_profile_picture fill-380x500 as profile_img %}
+        <img src="{{ profile_img.url }}"
+             alt="{{ page.title|default:"Project Title" }}">
+      {% else %}
+        <img src="{% static 'img/hero-illustration.svg' %}"
+             alt="{{ page.title|default:"Project Title" }}">
+      {% endif %}
+    </div>
+  </div>
+</section>
