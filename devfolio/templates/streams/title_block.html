@@ -23,7 +23,7 @@
                           </div>
                         {% endif %}
                     </div>
-                    <div class="col-lg-6 col-md-7 order-md-2 order-1 mb-md-0 mb-grid-gutter pe-md-7 text-end" style="z-index: -1;">
+                    <div class="col-lg-6 col-md-7 order-md-2 order-1 mb-md-0 mb-grid-gutter pe-md-7 text-center" style="z-index: -1;">
                         {% if self.main_profile_picture %}
                           {% image self.main_profile_picture fill-380x500 as profile_img %}
                           <img src="{{ profile_img.url }}" alt="{{ self.title|default:"Project Title" }}">
