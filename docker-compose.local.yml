@@ -34,6 +34,8 @@ services:
       - "8432:5432"
     env_file:
       - ./.envs/.local/.postgres
+
+      
   #   django:
   #     build:
   #       context: .
