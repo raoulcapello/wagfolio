@@ -6,6 +6,21 @@ from wagtail.core.fields import StreamField
 
 
 @register_setting
+class GoogleAnalyticsSettings(BaseSetting):
+    """Google Analytics settings for our custom website."""
+
+    tracking_script = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Paste your Google Analytics tracking script here",
+    )
+
+    panels = [
+        FieldPanel("tracking_script"),
+    ]
+
+
+@register_setting
 class SocialMediaSettings(BaseSetting):
     """Social Media settings for our custom website."""
 
@@ -27,8 +42,12 @@ class SocialMediaSettings(BaseSetting):
 class CompanyDetailsSettings(BaseSetting):
     """Company details shared across the site."""
 
-    owner = models.CharField(max_length=100, blank=True, null=True, default="Company Name")
-    status = models.TextField(max_length=255, blank=True, null=True, default="Company Description")
+    owner = models.CharField(
+        max_length=100, blank=True, null=True, default="Company Name"
+    )
+    status = models.TextField(
+        max_length=255, blank=True, null=True, default="Company Description"
+    )
     address = StreamField(
         [
             (

@@ -1,53 +1,56 @@
-{% load static wagtailcore_tags wagtailuserbar %}
+{% load static wagtailcore_tags wagtailuserbar custom_tags %}
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
-        {% block title %}
-        {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
-        {% endblock %}
-        {% block title_suffix %}
+      {% block title %}
+        {% if page.seo_title %}
+          {{ page.seo_title }}
+        {% else %}
+          {{ page.title }}
+        {% endif %}
+      {% endblock %}
+      {% block title_suffix %}
         {% wagtail_site as current_site %}
         {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
-        {% endblock %}
+      {% endblock %}
     </title>
     <!-- SEO Meta Tags-->
     <meta name="description" content="Raoul Capello Full Stack Web Developer">
-    <meta name="keywords" content="raoul capello wagtail full-stack django python web developer consultant amsterdam netherlands javascript react docker">
+    <meta name="keywords"
+          content="raoul capello wagtail full-stack django python web developer consultant amsterdam netherlands javascript react docker">
     <meta name="author" content="Raoul Capello">
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <![endif]-->
-
+<![endif]-->
     <!-- Favicon-->
     <link rel="icon" href="{% static 'img/favicons/favicon.ico' %}">
-
     <!-- Canonical URLs -->
-    <link rel="canonical" href="https://www.raoulcapello.com{{ request.get_full_path }}">
-
+    <link rel="canonical"
+          href="https://www.raoulcapello.com{{ request.get_full_path }}">
     {% block css %}
-    <!-- Vendor Styles-->
-    <link rel="stylesheet" media="screen" href="{% static 'css/simplebar.min.css' %}" />
-    {% block vendor_styles %}
-    {# Override this in templates to add extra stylesheets #}
-    {% endblock vendor_styles %}
-    {# Global stylesheets #}
-    <!-- Main Theme Styles + Bootstrap-->
-    <link rel="stylesheet" media="screen" href="{% static 'css/theme.min.css' %}">
-    {% comment %}
+      <!-- Vendor Styles-->
+      <link rel="stylesheet"
+            media="screen"
+            href="{% static 'css/simplebar.min.css' %}" />
+      {% block vendor_styles %}
+        {# Override this in templates to add extra stylesheets #}
+      {% endblock vendor_styles %}
+      {# Global stylesheets #}
+      <!-- Main Theme Styles + Bootstrap-->
+      <link rel="stylesheet"
+            media="screen"
+            href="{% static 'css/theme.min.css' %}">
+      {% comment %}
     <!-- project Stylesheet -->
     <link rel="stylesheet" media="screen" href="{% static 'css/project.css' %}">
-    {% endcomment %}
-    {% block extra_css %}
-    {# Override this in templates to add extra stylesheets #}
-    {% endblock %}
+      {% endcomment %}
+      {% block extra_css %}{# Override this in templates to add extra stylesheets #}{% endblock %}
     {% endblock %}
     {% comment %}
     <!-- Le javascript
@@ -57,53 +60,51 @@
     {# Placed at the top of the document so pages load faster with defer #}
     {% block javascript %}
     {% endblock javascript %}
-</head>
-
-<body class="{% block body_class %}{% endblock %}">
+  </head>
+  {% get_google_analytics_settings as ga_settings %}
+  {% if ga_settings and ga_settings.tracking_script %}{{ ga_settings.tracking_script|safe }}{% endif %}
+  <body class="{% block body_class %}{% endblock %}">
     {% wagtailuserbar 'bottom-left' %}
     <main class="page-wrapper">
-        {% block navbar %}
-          {% include 'partials/_navbar_top.html' %}
-        {% endblock navbar %}
-
-        {% block messages %}
-          {% include 'partials/_messages.html' %}
-        {% endblock messages %}
-
-        {% block page_content %}
+      {% block navbar %}
+        {% include 'partials/_navbar_top.html' %}
+      {% endblock navbar %}
+      {% block messages %}
+        {% include 'partials/_messages.html' %}
+      {% endblock messages %}
+      {% block page_content %}
         <!-- Page content-->
-        <div class="container d-flex flex-column pt-5 mt-n6" style="flex: 1 0 auto;">
-            {% block content %}This is not the content you're looking for.{% endblock content %}
-        </div> <!-- /.container -->
-        {% endblock page_content %}
+        <div class="container d-flex flex-column pt-5 mt-n6"
+             style="flex: 1 0 auto">
+          {% block content %}
+            This is not the content you're looking for.
+          {% endblock content %}
+        </div>
+        <!-- /.container -->
+      {% endblock page_content %}
     </main>
-
     <!-- Footer -->
     {% include 'partials/_footer.html' %}
-
     <!-- Back to top button-->
     <a class="btn-scroll-top" href="#top" data-scroll data-fixed-element>
-        <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
-        <i class="btn-scroll-top-icon ai-arrow-up"></i>
+      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
+      <i class="btn-scroll-top-icon ai-arrow-up"></i>
     </a>
-
-    {% block modal %}{% endblock modal %}
+    {% block modal %}
+    {% endblock modal %}
     {# Global javascript #}
     <!-- Vendor scripts: JS libraries and plugins-->
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/simplebar.min.js' %}"></script>
     <script src="{% static 'js/smooth-scroll.polyfills.min.j' %}s"></script>
     {% block vendor_scripts %}
-    {# Override this in templates to add extra javascript #}
+      {# Override this in templates to add extra javascript #}
     {% endblock vendor_scripts %}
     <!-- Main theme script-->
     <script src="{% static 'js/theme.min.js' %}"></script>
-    {% block extra_js %}
-    {# Override this in templates to add extra javascript #}
-    {% endblock %}
+    {% block extra_js %}{# Override this in templates to add extra javascript #}{% endblock %}
     {% block inline_javascript %}
-    {# Script tags with only code, no src (defer by default) #}
+      {# Script tags with only code, no src (defer by default) #}
     {% endblock inline_javascript %}
-</body>
-
+  </body>
 </html>
